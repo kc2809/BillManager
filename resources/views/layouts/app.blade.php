@@ -8,9 +8,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <link src="{{ asset('css/bootstrap2-toggle.min.css')}}" rel="stylesheet"> --}}
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script src="{{ asset('js/jquery-3.4.1.min.js')}}"></script>
+    {{-- <script src="{{ asset('js/bootstrap2-toggle.min.js')}}"></script> --}}
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -49,6 +56,23 @@
                                 </li>
                             @endif
                         @else
+
+                            @if( Auth::user()->isAdmin())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('users') }}">{{ __('USERS') }}</a>
+                                </li>
+                            @endif
+
+                            @can('read')
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('READDD') }}</a>
+                                </li>
+                            @elsecan('write')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('WRITE') }}</a>
+                                </li>
+                            @endcan
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -77,4 +101,5 @@
         </main>
     </div>
 </body>
+@yield('script')
 </html>

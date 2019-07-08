@@ -12,12 +12,12 @@ class RolesSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::create([
-            'name' => 'admin'
-        ]);
-
-        $staff = Role::create([
-            'name' => 'staff'
+       $bb = Role::create([
+            'name' => 'bb',
+            'permissions' => [
+                'aas' => true,
+                'bb' => false
+            ]
         ]);
     }
 }
