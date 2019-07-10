@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Repositories\RoleDao;
 
 class AdminController extends Controller
 {
+    protected $roleDao;
+
     //
-    public function __construct()
+    public function __construct(RoleDao $roleDao)
     {
+        $this->roleDao = $roleDao;
         $this->middleware('auth');
         $this->middleware('admin');
     }
@@ -28,9 +32,10 @@ class AdminController extends Controller
             $valid = $request->valid;
             
            $this->updateUserPermission($userId, $permission, $valid);
-           return "success";
+        //    return "success";
+            return var_dump($this->roleDao->getAll());
          }
-
+         
          return "failed";
     }
 

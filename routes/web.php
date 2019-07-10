@@ -117,3 +117,8 @@ Route::get('/dd', function () {
     print(Cons::READ_PERMISSION);
     return 'aa';
 })->middleware(Cons::READ_PERMISSION);
+
+
+Route::get('/bill', 'BillController@index');
+
+Route::post('/bill', 'BillController@print')->name('bill');

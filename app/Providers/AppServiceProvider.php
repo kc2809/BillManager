@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\RoleDao;
+use App\Repositories\RoleDaoImpl;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            \App\Repositories\RoleDao::class,
+            \App\Repositories\RoleDaoImpl::class
+        );
     }
 
     /**
