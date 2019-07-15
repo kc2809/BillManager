@@ -14,7 +14,6 @@
 use App\Cons;
 use App\Role;
 use App\User;
-use Anouar\Fpdf\Fpdf;
 use App\Http\Controllers\DB;
 use Illuminate\Http\Request;
 use App\Http\Middleware\CheckRole;
@@ -55,15 +54,6 @@ Route::post('/test', function (Request $request) {
     // return "wtf";
 
 })->middleware('can:read')->name('test');
-
-Route::get('pdf', function () {
-    $fpdf = new Fpdf();
-    $fpdf->AddPage();
-    $fpdf->SetFont('Arial', 'B', 16);
-    $fpdf->Cell(40, 10, 'Hello World!');
-    $fpdf->Output();
-    exit;
-});
 
 Route::get('/aa', function () {
     // $role =  Role::create([
@@ -122,3 +112,5 @@ Route::get('/dd', function () {
 Route::get('/bill', 'BillController@index');
 
 Route::post('/bill', 'BillController@print')->name('bill');
+
+Route::get('/printBillPdf', 'BillController@printBillPdf')->middleware(Cons::READ_PERMISSION)->name('printBillPdf');
